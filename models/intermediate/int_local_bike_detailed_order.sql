@@ -27,10 +27,11 @@ order_item.*,
 store.store_name,
 store.state as store_state,
 store.city as store_city,
-CONCAT(customer.first_name, " ", customer.last_name) as customer_name,
-customer.state as customer_state,
-customer.city as customer_city,
-customer.zip_code as customer_zip_code
+customer.customer_id
+-- CONCAT(customer.first_name, " ", customer.last_name) as customer_full_name,
+-- customer.state as customer_state,
+-- customer.city as customer_city,
+-- customer.zip_code as customer_zip_code
 
 from {{ ref('stg_local_bike_order_item')}} order_item
 left join {{ ref('stg_local_bike_order')}} orders on order_item.order_id = orders.order_id
@@ -59,11 +60,12 @@ sales.required_date,
 sales.shipped_date,
 sales.store_name,
 sales.store_state,
-sales.customer_name,
-sales.customer_state,
-sales.customer_city,
-case when lower(product.category_name) = "children bicycles" then 1
-else 0 end as has_kids_yes_no
+sales.customer_id
+-- sales.customer_name,
+-- sales.customer_state,
+-- sales.customer_city,
+-- case when lower(product.category_name) = "children bicycles" then 1
+-- else 0 end as has_kids_yes_no
 
 from sales_data sales
 left join product_data product on sales.product_id = product.product_id
