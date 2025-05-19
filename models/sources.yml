@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+
+  - name: local_bike
+    schema: local_bike_raw
+    tables:
+      - name: brand
+      - name: customer
+      - name: employee
+      - name: order
+      - name: order_item
+      - name: product
+      - name: product_category
+      - name: stock
+      - name: store
