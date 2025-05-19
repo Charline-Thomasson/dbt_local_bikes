@@ -24,7 +24,7 @@ WITH product_data AS (
   FROM
     product_data product
   LEFT JOIN
-    {{ref('int_stock_level')}} stock
+    {{ref('int_local_bike_stock_level')}} stock
   ON
     product.product_id = stock.product_id
   GROUP BY

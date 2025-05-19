@@ -36,7 +36,7 @@ customer.customer_id
 from {{ ref('stg_local_bike_order_item')}} order_item
 left join {{ ref('stg_local_bike_order')}} orders on order_item.order_id = orders.order_id
 left join {{ ref('stg_local_bike_store')}}store on orders.store_id = store.store_id
-left join {{ ref('stg_local_bike_customer')}} customer on orders.customer_id = customer.customer_id
+left join {{ ref('int_local_bike_customer')}} customer on orders.customer_id = customer.customer_id
 
 )
 
