@@ -1,0 +1,209 @@
+version: 2
+
+models:
+  - name: stg_local_bike_brand
+    description: "This model contains brand details"
+
+    columns:
+      - name: brand_id
+        description: "Primary key, unique identifier for each brand"
+        data_type: INT
+        tests:
+            - unique
+            - not_null
+      - name: brand_name
+        description: "Name of the brand"
+
+
+  - name: stg_local_bike_customer
+    description: "This model contains customers information including contact details"
+
+    columns:
+      - name: customer_id
+        description: "Primary key, unique identifier for each customer" 
+        data_type: INT
+        tests:
+            - unique
+            - not_null
+      - name: first_name
+        description: "Customer's first name"
+        tests:
+            - not_null
+      - name: last_name
+        description: "Customer's last name"
+        tests:
+            - not_null
+
+
+  - name: stg_local_bike_employee
+    description: "This model contains company-wide employees contact details and hierarchical dependencies"
+
+    columns:
+      - name: employee_id
+        description: "Primary key, unique identifier for each employee"
+        data_type: INT 
+        tests:
+            - unique
+            - not_null
+      - name: first_name
+        description: "Employee's first name"
+        tests:
+            - not_null
+      - name: last_name
+        description: "Employee's last name"
+        tests:
+            - not_null
+      - name: store_id
+        description: "Foreign key, refers to the store_id to which each employee is employed at. Is linked to store_id from the store model"
+        data_type: INT 
+        tests:
+            - not_null
+            - relationships:
+                name: store_id_id_foreign_key_in_stg_local_bike_employee
+                to: ref('stg_local_bike_store')
+                field: store_id
+      - name: manager_id
+        description: "refers to the employee id of the person they are reporting to, if the employee is the highest ranked (not reporting to anyone) then there is no manager_id"
+
+
+  - name: stg_local_bike_order_item
+    description: "This model contains order details at order item level: one row for each unique item ordered within the same order"
+
+    columns:
+      - name: order_item_id
+        description: "Primary key, unique identifier for each order at item level, it is added manually and composed of the concatenation of order_id with item_id"
+        tests:
+            - unique
+            - not_null
+      - name: order_id
+        description: "Foreign key, refers to the order id of the order model. It is repeated for each row of item the order is made of"
+        tests:
+            - not_null
+            - relationships:
+                name: order_id_id_foreign_key_in_stg_local_bike_order_item
+                to: ref('stg_local_bike_order')
+                field: order_id
+      - name: item_id
+        description: "Unique sequential identifier for an item within an order"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key, refers to the product id of the product referential model"
+        tests:
+            - not_null
+            - relationships:
+                name: product_id_id_foreign_key_in_stg_local_bike_order_item
+                to: ref('stg_local_bike_product')
+                field: product_id
+
+  - name: stg_local_bike_order
+    description: "This model contains information about orders"
+
+    columns:
+      - name: order_id
+        description: "Primary key, unique identifier for each order"
+        data_type: INT
+        tests:
+            - unique
+            - not_null
+      - name: customer_id
+        description: "Foreign key, refers to the customer id of the customer model. It is repeated for each order made by the same customer"
+        tests:
+            - not_null
+            - relationships:
+                name: order_id_id_foreign_key_in_stg_local_bike_order
+                to: ref('stg_local_bike_customer')
+                field: customer_id
+      - name: original_order_status
+        description: "The order status in its original form in the extracted data (integer between 1 and 4)"
+        # data_type: INT64
+        # tests:
+        #   - accepted_values:
+        #       name: accepted_values_original_order_status
+        #       values: [ 1, 2, 3, 4 ]
+      - name: new_order_status
+        description: "Order status calculated from the original order status:|if status = 4 the order has been finalized,|any other status the order is not finalized"
+      - name: store_id
+        description: "Foreign key, refers to the store id of the store model"
+        tests:
+            - not_null
+            - relationships:
+                name: store_id_id_foreign_key_in_stg_local_bike_order
+                to: ref('stg_local_bike_store')
+                field: store_id
+      - name: employee_id
+        description: "Foreign key, refers to the employee id of the employee model"
+        tests:
+            - not_null
+            - relationships:
+                name: employee_id_id_foreign_key_in_stg_local_bike_order
+                to: ref('stg_local_bike_employee')
+                field: employee_id
+
+  - name: stg_local_bike_product_category
+    description: "This model contains product category details"
+
+    columns:
+      - name: category_id
+        description: "Primary key, unique identifier for each product category"
+
+
+  - name: stg_local_bike_product
+    description: "This model contains a product referential or catalogue inclusive of unit prices"
+
+    columns:
+      - name: product_id
+        description: "Primary key, unique identifier for each product in the catalogue"
+      - name: brand_id
+        description: "Foreign key, refers to the brand id of the brand model"
+        tests:
+            - not_null
+            - relationships:
+                name: brand_id_id_foreign_key_in_stg_local_bike_product
+                to: ref('stg_local_bike_brand')
+                field: brand_id
+      - name: category_id
+        description: "Foreign key, refers to the category id of the product category model"
+        tests:
+            - not_null
+            - relationships:
+                name: category_id_id_foreign_key_in_stg_local_bike_product
+                to: ref('stg_local_bike_product_category')
+                field: category_id
+
+  - name: stg_local_bike_stock
+    description: "This model is a detailed photo of stocks for each store"
+
+    columns:
+      - name: stock_id 
+        description: "Primary key, unique identifier for each stock of each store,|it is added manually and composed of the concatenation of product_id with store_id"
+        tests: 
+          - unique
+          - not_null
+      - name: store_id
+        description: "Foreign key, refers to the store id of the store model"
+        tests:
+            - not_null
+            - relationships:
+                name: store_id_id_foreign_key_in_stg_local_bike_stock
+                to: ref('stg_local_bike_store')
+                field: store_id
+      - name: product_id
+        description: "Foreign key, refers to the product id of the product model"
+        tests:
+            - not_null
+            - relationships:
+                name: product_id_id_foreign_key_in_stg_local_bike_stock
+                to: ref('stg_local_bike_product')
+                field: product_id
+
+  - name: stg_local_bike_store
+    description: "This model contains store details"    
+
+    columns:
+      - name: store_id
+        description:  "Primary key, unique identifier for each store"
+        data_type: INT
+        tests:
+          - unique
+          - not_null

@@ -1,5 +1,5 @@
 select
-    staff_id,
+    staff_id as employee_id,
     first_name,
     last_name,
     email,

@@ -9,5 +9,5 @@ select
     required_date,
     safe_cast(shipped_date as date) as shipped_date,
     store_id,
-    staff_id
+    staff_id as employee_id
 from {{ source("local_bike", "order") }}
