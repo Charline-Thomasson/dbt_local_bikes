@@ -122,7 +122,7 @@ models:
         #       name: accepted_values_original_order_status
         #       values: [ 1, 2, 3, 4 ]
       - name: new_order_status
-        description: "Order status calculated from the original order status:|if status = 4 the order has been finalized,|any other status the order is not finalized"
+        description: "Order status calculated from the original order status: if status = 4 the order has been finalized, any other status the order is not finalized"
       - name: store_id
         description: "Foreign key, refers to the store id of the store model"
         tests:
@@ -176,7 +176,7 @@ models:
 
     columns:
       - name: stock_id 
-        description: "Primary key, unique identifier for each stock of each store,|it is added manually and composed of the concatenation of product_id with store_id"
+        description: "Primary key, unique identifier for each stock of each store, it is added manually and composed of the concatenation of product_id with store_id"
         tests: 
           - unique
           - not_null
