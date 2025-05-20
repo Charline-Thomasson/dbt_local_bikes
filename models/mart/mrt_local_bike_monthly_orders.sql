@@ -17,7 +17,7 @@ SELECT
   ROUND(SUM(quantity) / COUNT(DISTINCT order_id)) AS average_order_item,
   ROUND(LAG(SUM(quantity) / COUNT(DISTINCT order_id), 1, 0) OVER (PARTITION BY store_name, product_name, product_brand, product_category ORDER BY year, month)) AS previous_month_average_order_item,
 FROM
-  {{ref('int_local_bike_detailed_order')}}
+  {{ref('mrt_local_bike_detailed_order')}}
 
 GROUP BY
   ALL

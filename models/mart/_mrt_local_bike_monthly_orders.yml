@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: mrt_local_bike_monthly_orders
+    description: '{{ doc("mrt_local_bike_monthly_orders")}}'
+    columns:
+      - name: year
+        description: "The year of the sales month"
+        tests:
+          - not_null
+      - name: month
+        description: "The month of the sales (1-12)"
+        tests:
+          - not_null
+      - name: year_month
+        description: "The year and month of the sales in YYYY-MM format"
+        tests:
+          - not_null
+      - name: store_name
+        description: "The name of the store where the sales occurred"
+        tests:
+          - not_null
+      - name: product_name
+        description: "The name of the product sold"
+        tests:
+          - not_null
+      - name: product_brand
+        description: "The brand name of the product sold"
+      - name: product_category
+        description: "The category name of the product sold"
+      - name: total_orders
+        description: "The total number of distinct orders for the given period, store, product, brand, and category"
+        tests:
+          - not_null
+      - name: previous_month_total_orders
+        description: "The total number of distinct orders from the previous month for the same store, product, brand, and category"
+        tests:
+          - not_null
+      - name: total_items_sold
+        description: "The total quantity of items sold for the given period, store, product, brand, and category"
+        tests:
+          - not_null
+      - name: previous_month_total_items_sold
+        description: "The total quantity of items sold from the previous month for the same store, product, brand, and category"
+        tests:
+          - not_null
+      - name: total_order_amount
+        description: "The total monetary value of orders for the given period, store, product, brand, and category, rounded to two decimal places"
+        tests:
+          - not_null
+      - name: previous_month_total_order_amount
+        description: "The total monetary value of orders from the previous month for the same store, product, brand, and category, rounded to two decimal places"
+        tests:
+          - not_null
+      - name: average_order_value
+        description: "The average monetary value per order for the given period, store, product, brand, and category, rounded to two decimal places"
+      - name: previous_month_average_order_value
+        description: "The average monetary value per order from the previous month for the same store, product, brand, and category, rounded to two decimal places"
+      - name: average_order_item
+        description: "The average number of items per order for the given period, store, product, brand, and category, rounded to the nearest whole number"
+      - name: previous_month_average_order_item
+        description: "The average number of items per order from the previous month for the same store, product, brand, and category, rounded to the nearest whole number"

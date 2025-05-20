@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_local_bike_detailed_product
+    description: '{{ doc("int_local_bike_detailed_product")}}'
+    columns:
+      - name: product_name
+        description: "The name of the product"
+        tests:
+          - not_null
+      - name: model_year
+        description: "The model year of the product"
+      - name: product_id
+        description: "The unique identifier for the product"
+        tests:
+          - unique
+          - not_null
+      - name: brand_name
+        description: "The name of the brand associated with the product"
+      - name: brand_id
+        description: "The unique identifier for the brand"
+      - name: category_name
+        description: "The name of the product category"
+      - name: category_id
+        description: "The unique identifier for the product category"

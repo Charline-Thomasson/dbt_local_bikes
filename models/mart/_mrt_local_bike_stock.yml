@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: mrt_local_bike_stock
+    description: '{{ doc("mrt_local_bike_stock")}}'
+
+    columns:
+
+      - name: product_name
+        description: "The name of the product"
+        tests:
+          - not_null
+          
+      - name: store_id_1_stock
+        description: "The total stock quantity of the product at Store ID 1"
+        
+      - name: store_id_2_stock
+        description: "The total stock quantity of the product at Store ID 2"
+        
+      - name: store_id_3_stock
+        description: "The total stock quantity of the product at Store ID 3"
+  
+      - name: total_stock_status
+        description: "A categorical status indicating the overall stock level for the product across all analyzed stores (e.g., 'sold out', 'low stock', 'sufficient stock')"

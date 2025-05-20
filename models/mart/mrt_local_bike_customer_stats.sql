@@ -11,7 +11,7 @@ WITH customer_category_preferences AS (
         SUM(CASE WHEN product_category = 'Mountain Bikes' OR product_category = 'Cyclocross Bicycles' OR product_category = "Road Bikes" THEN 1 ELSE 0 END) AS sports_bike_purchases,
         SUM(CASE WHEN product_category = 'Children Bicycles' THEN 1 ELSE 0 END) AS kids_bike_purchases
     FROM
-        {{ref('int_local_bike_detailed_order')}} orders
+        {{ref('mrt_local_bike_detailed_order')}} orders
         LEFT JOIN {{ref('int_local_bike_customer')}} customer
         ON orders.customer_id = customer.customer_id
     GROUP BY
@@ -50,7 +50,7 @@ combined_segments AS ( -- CTE to combine the 2 segmentations
     ELSE 0 
     END AS has_kids
   FROM customer_segments s
-  JOIN {{ref('int_local_bike_detailed_order')}} sd ON s.customer_id = sd.customer_id
+  JOIN {{ref('mrt_local_bike_detailed_order')}} sd ON s.customer_id = sd.customer_id
   GROUP BY ALL
 ),
 customer_favorites AS (
@@ -68,7 +68,7 @@ customer_favorites AS (
             COUNT(*) AS purchase_count,
             ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY COUNT(*) DESC) AS rn
         FROM
-            {{ref('int_local_bike_detailed_order')}}
+            {{ref('mrt_local_bike_detailed_order')}}
         GROUP BY
             customer_id,
             product_brand,
@@ -102,7 +102,7 @@ final_result AS (
         cf.favorite_brand,
         cf.favorite_product
     FROM
-        {{ref('int_local_bike_detailed_order')}} sd
+        {{ref('mrt_local_bike_detailed_order')}} sd
     JOIN
         combined_segments cs ON sd.customer_id = cs.customer_id
     LEFT JOIN 
