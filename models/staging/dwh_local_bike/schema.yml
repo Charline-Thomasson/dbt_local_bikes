@@ -118,7 +118,7 @@ models:
         tests:
           - accepted_values:
               name: accepted_values_original_order_status
-              values: ["1","2","3","4"]
+              values: [ '1', '2', '3', '4' ]
       - name: new_order_status
         description: "Order status calculated from the original order status:|if status = 4 the order has been finalized,|any other status the order is not finalized"
       - name: store_id
