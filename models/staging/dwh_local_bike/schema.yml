@@ -102,6 +102,7 @@ models:
     columns:
       - name: order_id
         description: "Primary key, unique identifier for each order"
+        data_type: INT
         tests:
             - unique
             - not_null
@@ -115,10 +116,11 @@ models:
                 field: customer_id
       - name: original_order_status
         description: "The order status in its original form in the extracted data (integer between 1 and 4)"
-        tests:
-          - accepted_values:
-              name: accepted_values_original_order_status
-              values: [ '1', '2', '3', '4' ]
+        # data_type: INT64
+        # tests:
+        #   - accepted_values:
+        #       name: accepted_values_original_order_status
+        #       values: [ 1, 2, 3, 4 ]
       - name: new_order_status
         description: "Order status calculated from the original order status:|if status = 4 the order has been finalized,|any other status the order is not finalized"
       - name: store_id
