@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_local_bike_stock_level
+    description: '{{ doc("int_local_bike_stock_level")}}'
+    columns:
+      - name: store_id
+        description: "The unique identifier for the store"
+        tests:
+          - not_null
+      - name: store_name
+        description: "The name of the store"
+      - name: product_id
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+      - name: quantity
+        description: "The current quantity of the product in stock at the store"
+        tests:
+          - not_null

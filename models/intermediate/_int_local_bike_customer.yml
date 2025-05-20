@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: int_local_bike_customer
+    description: '{{ doc("int_local_bike_customer")}}'
+    columns:
+      - name: customer_id
+        description: "Primary key for the customer"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The first name of the customer"
+      - name: last_name
+        description: "The last name of the customer"
+      - name: full_name
+        description: "The concatenated full name of the customer"
+      - name: phone
+        description: "The phone number of the customer"
+      - name: email
+        description: "The email address of the customer"
+        tests:
+          - unique
+      - name: street
+        description: "The street address of the customer"
+      - name: city
+        description: "The city of the customer's address"
+      - name: state
+        description: "The state of the customer's address"
+      - name: zip_code
+        description: "The zip code of the customer's address"
+      - name: full_address
+        description: "The concatenated full address of the customer"

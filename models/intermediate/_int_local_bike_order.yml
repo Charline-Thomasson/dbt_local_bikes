@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: int_local_bike_order
+    description: '{{ doc("int_local_bike_order")}}'
+    columns:
+      - name: order_date
+        description: "The date the order was placed"
+        tests:
+          - not_null
+      - name: year
+        description: "The year of the order date"
+        tests:
+          - not_null
+      - name: month
+        description: "The month of the order date (1-12)"
+        tests:
+          - not_null
+      - name: year_month
+        description: "The year and month of the order date in YYYY-MM format"
+        tests:
+          - not_null
+      - name: original_order_status
+        description: "The original status of the order"
+      - name: customer_id
+        description: "The unique identifier for the customer who placed the order"
+        tests:
+          - not_null
+      - name: new_order_status
+        description: "The current or updated status of the order"
+      - name: required_date
+        description: "The date by which the order is required"
+      - name: shipped_date
+        description: "The date the order was shipped"
+      - name: order_id
+        description: "The unique identifier for the order. This is typically a foreign key to the orders table"
+        tests:
+          - not_null
+      - name: item_id
+        description: "The unique identifier for the specific item within an order. Combined with order_id, this forms a unique key for an order item"
+        tests:
+          - not_null
+      - name: product_id
+        description: "The unique identifier for the product in the order item"
+      - name: quantity
+        description: "The quantity of the product ordered in this item"
+      - name: list_price
+        description: "The list price of the product at the time of the order"
+      - name: discount
+        description: "The discount applied to this order item, as a decimal (e.g., 0.10 for 10% discount)"
+      - name: store_name
+        description: "The name of the store where the order was placed"
+      - name: store_state
+        description: "The state where the store is located"
+      - name: store_city
+        description: "The city where the store is located"

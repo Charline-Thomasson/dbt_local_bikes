@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: mrt_local_bike_customer_stats
+    description: '{{ doc("mrt_local_bike_customer_stats")}}'
+    columns:
+      - name: customer_name
+        description: "The full name of the customer"
+        tests:
+          - not_null
+      - name: customer_id
+        description: "The unique identifier for the customer"
+        tests:
+          - unique
+          - not_null
+      - name: customer_state
+        description: "The state where the customer resides"
+      - name: customer_city
+        description: "The city where the customer resides"
+      - name: customer_full_address
+        description: "The full concatenated address of the customer"
+      - name: has_kids
+        description: "A flag indicating if the customer has purchased children's bicycles (1 for yes, 0 for no)"
+        tests:
+          - not_null
+      - name: store_name
+        description: "The name of the store associated with the customer's orders (if applicable, typically from their first or most recent order)"
+      - name: first_buy
+        description: "The date of the customer's first recorded purchase"
+        tests:
+          - not_null
+      - name: last_buy
+        description: "The date of the customer's most recent purchase"
+        tests:
+          - not_null
+      - name: months_since_last_buy
+        description: "The number of months since the customer's last purchase, relative to a fixed date (2018-12-29)"
+      - name: new_known_customer
+        description: "Categorization of the customer as 'new customer' (only one purchase date) or 'repeated customer' (multiple purchase dates)"
+        tests:
+          - not_null
+      - name: total_orders
+        description: "The total number of distinct orders placed by the customer"
+        tests:
+          - not_null
+      - name: total_items
+        description: "The total number of individual items purchased by the customer across all orders"
+        tests:
+          - not_null
+      - name: average_order_item
+        description: "The average number of items per order for the customer, rounded to two decimal places"
+      - name: customer_lifetime_value
+        description: "The total monetary value of all purchases made by the customer, rounded to two decimal places"
+        tests:
+          - not_null
+      - name: average_order_amount
+        description: "The average monetary value per order for the customer, rounded to two decimal places"
+      - name: customer_segment
+        description: "A segment assigned to the customer based on their predominant bicycle category purchases (e.g., 'City Bikers', 'Sports Bikers', 'Kids', 'Mixed')"
+        tests:
+          - not_null
+      - name: favorite_brand
+        description: "The brand most frequently purchased by the customer"
+      - name: favorite_product
+        description: "The specific product most frequently purchased by the customer"

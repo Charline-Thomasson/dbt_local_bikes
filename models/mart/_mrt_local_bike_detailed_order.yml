@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: mrt_local_bike_detailed_order
+    description: '{{ doc("mrt_local_bike_detailed_order")}}'
+    columns:
+      - name: order_date
+        description: "The date the order was placed"
+        tests:
+          - not_null
+      - name: year
+        description: "The year of the order date"
+        tests:
+          - not_null
+      - name: month
+        description: "The month of the order date (1-12)"
+        tests:
+          - not_null
+      - name: year_month
+        description: "The year and month of the order date in YYYY-MM format"
+        tests:
+          - not_null
+      - name: order_id
+        description: "The unique identifier for the order"
+        tests:
+          - not_null
+      - name: original_order_status
+        description: "The initial status of the order"
+      - name: new_order_status
+        description: "The updated or current status of the order"
+      - name: product_name
+        description: "The name of the product purchased"
+      - name: product_id
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+      - name: product_brand
+        description: "The brand name of the product"
+      - name: product_category
+        description: "The category name of the product"
+      - name: quantity
+        description: "The quantity of the product in the order line item"
+        tests:
+          - not_null
+      - name: unit_price
+        description: "The unit price of the product at the time of purchase"
+        tests:
+          - not_null
+      - name: discount
+        description: "The discount applied to the order line item as a decimal (e.g., 0.10 for 10%)"
+      - name: total_line_amount
+        description: "The total price for the order line item after applying quantity and discount, rounded to two decimal places"
+        tests:
+          - not_null
+      - name: required_date
+        description: "The date by which the order is required to be delivered"
+      - name: shipped_date
+        description: "The actual date the order was shipped"
+      - name: store_name
+        description: "The name of the store where the order was placed"
+      - name: store_state
+        description: "The state where the store is located"
+      - name: customer_id
+        description: "The unique identifier for the customer who placed the order"
+        tests:
+          - not_null
