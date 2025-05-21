@@ -95,6 +95,20 @@ models:
                 name: product_id_id_foreign_key_in_stg_local_bike_order_item
                 to: ref('stg_local_bike_product')
                 field: product_id
+      - name: quantity
+        description: "Quantity of items ordered at item/product_id level"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              name: positive_quantity 
+              expression: '> 0' 
+      - name: unit_price
+        description: "Price for one unit of the ordered item"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              name: non_negative_price 
+              expression: '> 0.0' 
 
   - name: stg_local_bike_order
     description: "This model contains information about orders"
@@ -123,6 +137,13 @@ models:
         #       values: [ 1, 2, 3, 4 ]
       - name: new_order_status
         description: "Order status calculated from the original order status: if status = 4 the order has been finalized, any other status the order is not finalized"
+      - name: order_date
+        description: "Date the order was created in format YYYY-MM-DD"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              name: order_date_is_date
+              column_type: date
       - name: store_id
         description: "Foreign key, refers to the store id of the store model"
         tests:
