@@ -47,23 +47,23 @@ SELECT
       WHEN store_id = 1 THEN stock_left
       ELSE 0
   END
-    ) AS store_id_1_stock,
+    ) AS Santa_Cruz_Bikes,
   SUM(CASE
       WHEN store_id = 2 THEN stock_left
       ELSE 0
   END
-    ) AS store_id_2_stock,
+    ) AS Baldwin_Bikes,
   SUM(CASE
       WHEN store_id = 3 THEN stock_left
       ELSE 0
   END
-    ) AS store_id_3_stock,
+    ) AS Rowlett_Bikes,
   SUM(stock_left) as total_stock,
 
   CASE 
-  WHEN SUM(stock_left) = 0 THEN "sold out (no stock left)"
+  WHEN SUM(stock_left) = 0 THEN "sold out"
   WHEN (SUM(stock_left) >= 1 AND SUM(stock_left) <= 4) THEN "low stock (1-4 left)"
-  WHEN SUM(stock_left) >= 5 THEN "sufficient stock (>4 left)"
+  WHEN SUM(stock_left) >= 5 THEN "sufficient stock"
   END AS total_stock_status
 
 FROM
