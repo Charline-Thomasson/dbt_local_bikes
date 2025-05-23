@@ -3,7 +3,7 @@ select
     customer_id,
     order_status as original_order_status,
     case
-        when order_status = 4 then "finalised_order" else "non_finalised_order"
+        when order_status = 4 then "finalised order" else "non finalised order"
     end as new_order_status,
     order_date,
     required_date,
