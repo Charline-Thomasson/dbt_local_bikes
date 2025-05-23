@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: mrt_local_bike_customer_stats
-    description: '{{ doc("mrt_local_bike_customer_stats")}}'
+  - name: mrt_local_bike_customer_insight
+    description: '{{ doc("mrt_local_bike_customer_insights")}}'
     columns:
       - name: customer_name
         description: "The full name of the customer"

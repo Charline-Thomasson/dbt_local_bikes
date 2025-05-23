@@ -1,12 +1,12 @@
-{% docs mrt_local_bike_customer_stats %}
+{% docs mrt_local_bike_customer_insights %}
 
 # mrt_local_bike_customer_stats Model Documentation
 
-This document provides detailed information about the `mrt_local_bike_customer_stats` dbt model, designed to offer a deep, analytical understanding of our customer base, including their purchasing habits, preferences, and overall value.
+This document provides detailed information about the `mrt_local_bike_customer_insights` dbt model, designed to offer a deep, analytical understanding of our customer base, including their purchasing habits, preferences, and overall value.
 
 ## Overview
 
-The `mrt_local_bike_customer_stats` model is a robust dimension table that combines detailed customer information with their complete purchasing history to derive key metrics and segments. It calculates essential customer lifetime value (CLV) indicators, identifies purchasing patterns, and assigns customers to specific segments based on their preferred bicycle categories. This model is critical for targeted marketing campaigns, customer relationship management, and strategic business decision-making.
+The `mrt_local_bike_customer_insights` model is a robust dimension table that combines detailed customer information with their complete purchasing history to derive key metrics and segments. It calculates essential customer lifetime value (CLV) indicators, identifies purchasing patterns, and assigns customers to specific segments based on their preferred bicycle categories. This model is critical for targeted marketing campaigns, customer relationship management, and strategic business decision-making.
 
 ## Data Sources
 
@@ -18,7 +18,7 @@ The model builds upon these sources through a series of CTEs and joins to enrich
 
 ## Model Logic
 
-The `mrt_local_bike_customer_stats` model is constructed through several sequential Common Table Expressions (CTEs) and a final aggregation:
+The `mrt_local_bike_customer_insights` model is constructed through several sequential Common Table Expressions (CTEs) and a final aggregation:
 
 * **`customer_category_preferences` CTE**: This CTE calculates the total number of purchases for specific bicycle categories (City Bikes, Sports Bikes, Kids Bikes) for each customer. It joins `mrt_local_bike_detailed_order` with `int_local_bike_customer` and groups by all customer attributes to sum up category-specific purchases.
 * **`customer_segments` CTE**: This CTE uses the purchase counts from `customer_category_preferences` to assign a `customer_segment`. It employs `CASE` statements to identify predominant purchase types, handling tie-breaker scenarios to assign segments like 'City Bikers', 'Sports Bikers', 'Kids', or 'Mixed'.
