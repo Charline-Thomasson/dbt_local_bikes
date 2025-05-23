@@ -6,6 +6,8 @@ SELECT
   product_name,
   product_brand,
   product_category,
+  original_order_status,
+  new_order_status,
   COUNT(DISTINCT order_id) total_orders,
   ROUND(LAG(COUNT(DISTINCT order_id), 1, 0) OVER (PARTITION BY store_name, product_name, product_brand, product_category ORDER BY year, month)) AS previous_month_total_orders,
   SUM(quantity) AS total_items_sold,
