@@ -58,6 +58,7 @@ SELECT
       ELSE 0
   END
     ) AS store_id_3_stock,
+  SUM(stock_left) as total_stock,
 
   CASE 
   WHEN SUM(stock_left) = 0 THEN "sold out (no stock left)"
