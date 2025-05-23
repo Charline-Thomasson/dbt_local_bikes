@@ -46,7 +46,7 @@ combined_segments AS ( -- CTE to combine the 2 segmentations
     s.zip_code,
     s.full_address,
     s.customer_segment,
-    CASE WHEN (product_category) = "children bicycles" THEN 1
+    CASE WHEN LOWER(product_category) = "children bicycles" THEN 1
     ELSE 0 
     END AS has_kids
   FROM customer_segments s
