@@ -76,6 +76,24 @@ In the sql file of the model I would try to add this config:
     )  
 }}  
 
+## A final dashboard is available in PowerBI  
+https://app.powerbi.com/links/fJ-tTX2u4_?ctid=30131f05-99e7-440a-a5e9-d3e8201e730c&pbi_source=linkShare  
+
+/!\ There are flaws in the data which need to be corrected
+For example average item per order should be around 4/5 overall.
+The monthly dataset derived from the detailed_order dataset (order_item level) shouldn't have been pre-aggregated for measures of type average.  
+For now notable insights to be derived from avaialble data are:    
+A confirmation that that Baldwin is the historical shop with the largest customer base abd the highest number of orders/ revenue  
+However Santa Cruz Bikes has the highest share of returning customers  
+Amongst order insights we can see that the "Trek" brand generates most revenue due to hight prices.  
+But Electra is the most ordered brand (most units sold).  
+This brand trend is true for all 3 shops.  
+The newest store: Rowlett Bikes has the highest average customer lifetime value (but this could be biased by the lower customer base)  
+
+There is no explanation from looking at stocks regarding the non finalised orders from April 2018 onwards.
+As there is no date attached to the stock photo it is difficult to know if it is compared to the relevant period.  
+
+
 ### On data quality: improvements/ steps required  
 
 -  `order_status`:  needs to be explicit, there is no indication whatsoever as to what those integers mean.  
